@@ -1,18 +1,15 @@
 document.querySelector(".buscar").addEventListener("click", async () => {
-  const cep = document.querySelector("#cep").value;
+  const cep = document.querySelector("#cep");
   const validCep = /^[0-9]{5}-?[0-9]{3}$/;
-  console.log(cep)
-  if (validCep.test(cep)) {
-    const resp = await fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
+  if (validCep.test(cep.value)) {
+    const resp = await fetch(`https://brasilapi.com.br/api/cep/v1/${cep.value}`)
       .then((res) => res.json())
       .catch((res) => window.alert(`Cep invalido tente Outro: Erro: ${res}`));
-    console.log(resp);
     CriarCard(resp);
   }else {
     window.alert("Email Invalido")
   }
-
-  cep.value = "";
+  cep.value = ""
 });
 
 const CriarCard = (data) => {
